@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Dialog_Full_Screen">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!--<item name="android:windowTranslucentNavigation" tools:targetApi="kitkat">true</item>-->
+        <!--<item name="android:navigationBarColor" tools:targetApi="lollipop">#111111</item>-->
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:windowAnimationStyle">@style/PickerAnim</item>
+        <!--<item name="android:backgroundDimEnabled">false</item>-->
+        <!--<item name="android:windowIsTranslucent">true</item>-->
+        <!--<item name="android:backgroundDimAmount">0.1</item>-->
+
+        <!--<item name="android:background">@android:color/transparent</item>-->
+        <!--<item name="android:background">#60000000</item>-->
+    </style>
+
+    <style name="PickerAnim">
+        <item name="android:windowEnterAnimation">@anim/picker_enter</item>
+        <item name="android:windowExitAnimation">@anim/picker_exit</item>
+    </style>
+</resources>

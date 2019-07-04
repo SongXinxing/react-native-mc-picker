@@ -1,0 +1,12 @@
+{
+  "name": "react-native-mc-picker",
+  "version": "0.0.1",
+  "description": "A Picker View",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "meicai",
+  "license": "Apache2.0"
+}
