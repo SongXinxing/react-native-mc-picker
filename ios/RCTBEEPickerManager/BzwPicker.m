@@ -13,11 +13,11 @@
 
 @implementation BzwPicker
 
--(instancetype)initWithFrame:(CGRect)frame dic:(NSDictionary *)dic leftStr:(NSString *)leftStr centerStr:(NSString *)centerStr rightStr:(NSString *)rightStr topbgColor:(NSArray *)topbgColor bottombgColor:(NSArray *)bottombgColor leftbtnbgColor:(NSArray *)leftbtnbgColor rightbtnbgColor:(NSArray *)rightbtnbgColor centerbtnColor:(NSArray *)centerbtnColor selectValueArry:(NSArray *)selectValueArry  weightArry:(NSArray *)weightArry
+-(instancetype)initWithFrame:(CGRect)frame dic:(NSDictionary *)dic selectValueArry:(NSArray *)selectValueArry  weightArry:(NSArray *)weightArry
        pickerToolBarFontSize:(NSString *)pickerToolBarFontSize  pickerFontSize:(NSString *)pickerFontSize  pickerFontColor:(NSArray *)pickerFontColor pickerRowHeight:(NSString *)pickerRowHeight pickerFontFamily:(NSString *)pickerFontFamily
-
 {
     self = [super initWithFrame:frame];
+    //    self = [super initWithFrame:super.frame];
     if (self)
     {
         self.backArry=[[NSMutableArray alloc]init];
@@ -26,9 +26,6 @@
         self.selectValueArry=selectValueArry;
         self.weightArry=weightArry;
         self.pickerDic=dic;
-        self.leftStr=leftStr;
-        self.rightStr=rightStr;
-        self.centStr=centerStr;
         self.pickerToolBarFontSize=pickerToolBarFontSize;
         self.pickerFontSize=pickerFontSize;
         self.pickerFontFamily=pickerFontFamily;
@@ -37,57 +34,21 @@
         [self getStyle];
         [self getnumStyle];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self makeuiWith:topbgColor With:bottombgColor With:leftbtnbgColor With:rightbtnbgColor With:centerbtnColor];
+            [self makeuiWith];
             [self selectRow];
         });
     }
     return self;
 }
 
-
-
--(void)makeuiWith:(NSArray *)topbgColor With:(NSArray *)bottombgColor With:(NSArray *)leftbtnbgColor With:(NSArray *)rightbtnbgColor With:(NSArray *)centerbtnColor
+-(void)makeuiWith
 {
-//
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0,SCREEN_HEIGHT-pickerHeight-40, self.frame.size.width,40)];
-    view.backgroundColor = [self colorWith:topbgColor];
-    [self addSubview:view];
-    
-    self.leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.leftBtn.frame = CGRectMake(0, 0, 90, 40);
-    self.leftBtn.font = [UIFont fontWithName:_pickerFontFamily size:[_pickerToolBarFontSize integerValue]];
-    self.leftBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [self.leftBtn setTitleEdgeInsets:UIEdgeInsetsMake(15, 20.0, 0, 0)];
-    [self.leftBtn setTitle:self.leftStr forState:UIControlStateNormal];
-    [self.leftBtn setTitleColor:[self colorWith:leftbtnbgColor] forState:UIControlStateNormal];
-    [self.leftBtn addTarget:self action:@selector(cancleAction) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:self.leftBtn];
-    
-    self.rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.rightBtn.frame = CGRectMake(view.frame.size.width-90,0, 90, 40);
-    self.rightBtn.font = [UIFont fontWithName:_pickerFontFamily size:[_pickerToolBarFontSize integerValue]];
-    self.rightBtn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentRight;
-    [self.rightBtn setTitleEdgeInsets:UIEdgeInsetsMake(15, 0, 0, 20.0)];
-    [self.rightBtn setTitle:self.rightStr forState:UIControlStateNormal];
-    [self.rightBtn setTitleColor:[self colorWith:rightbtnbgColor] forState:UIControlStateNormal];
-    [self.rightBtn addTarget:self action:@selector(cfirmAction) forControlEvents:UIControlEventTouchUpInside];  
-    [view addSubview:self.rightBtn];
-    
-    UILabel *cenLabel=[[UILabel alloc]initWithFrame:CGRectMake(90, 5, SCREEN_WIDTH-180, 30)];
-    cenLabel.text=self.centStr;
-    cenLabel.textAlignment=NSTextAlignmentCenter;
-    cenLabel.font = [UIFont fontWithName:_pickerFontFamily size:[_pickerToolBarFontSize integerValue]];
-    [cenLabel setTextColor:[self colorWith:centerbtnColor]];
-    [view addSubview:cenLabel];
-
-    self.pick = [[UIPickerView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-pickerHeight, self.frame.size.width, pickerHeight)];
+    self.pick = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
     self.pick.delegate = self;
     self.pick.dataSource = self;
-    self.pick.showsSelectionIndicator=YES;
+    //    self.pick.showsSelectionIndicator=YES;
     [self addSubview:self.pick];
     
-    self.pick.backgroundColor=[self colorWith:bottombgColor];
-//    self.pick.backgroundColor=[UIColor whiteColor];
 }
 //返回显示的列数
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -234,12 +195,12 @@
                 NSString *twostr=[NSString stringWithFormat:@"%@",self.weightArry[1]];
                 
                 double totalweight=onestr.doubleValue+twostr.doubleValue;
-//                 if (component==0) {
-//                     return _lineWith*onestr.doubleValue/totalweight;
-//                 }else{
-//                     return _lineWith*twostr.doubleValue/totalweight;
-//                 }
-                   return columnWidth;
+                //                 if (component==0) {
+                //                     return _lineWith*onestr.doubleValue/totalweight;
+                //                 }else{
+                //                     return _lineWith*twostr.doubleValue/totalweight;
+                //                 }
+                return columnWidth;
             }
             else{
                 if (self.weightArry.count>0) {
@@ -455,7 +416,6 @@
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     [dic setValue:self.backArry forKey:@"selectedValue"];
     
-    [dic setValue:@"select" forKey:@"type"];
     NSMutableArray *value = [self getselectIndexArry];
     
     if([value count] == 0) {
@@ -585,78 +545,6 @@
         }
     }
 }
-
-//按了取消按钮
--(void)cancleAction
-{
-    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-    NSLog(@"测试取消按钮");
-    if (self.backArry.count>0) {
-        [dic setValue:self.backArry forKey:@"selectedValue"];
-        [dic setValue:@"cancel" forKey:@"type"];
-
-        [dic setValue:[self getselectIndexArry] forKey:@"selectedIndex"];
-
-        self.bolock(dic);
-    }else{
-        [self getNOselectinfo];
-
-        [dic setValue:self.backArry forKey:@"selectedValue"];
-        [dic setValue:@"cancel" forKey:@"type"];
-        [dic setValue:[self getselectIndexArry] forKey:@"selectedIndex"];
-        self.bolock(dic);
-    }
-
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [UIView animateWithDuration:.2f animations:^{
-
-            [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, pickerHeight)];
-
-        }];
-    });
-
-    self.pick.hidden=YES;
-    self.pickerBgView.hidden=YES;
-}
-//按了确定按钮
--(void)cfirmAction
-{
-    //判断当前是否在滚动选择 如果是 则禁用确定按钮
-    if ([self anySubViewScrolling:self.pick]) {
-        return ;
-    }
-    
-    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-    
-    if (self.backArry.count>0) {
-        
-        [dic setValue:self.backArry forKey:@"selectedValue"];
-        [dic setValue:@"confirm" forKey:@"type"];
-        NSMutableArray *arry=[[NSMutableArray alloc]init];
-        [dic setValue:[self getselectIndexArry] forKey:@"selectedIndex"];
-//        [dic setValue:arry forKey:@"selectedIndex"];
-        
-        self.bolock(dic);
-        
-    }else{
-        [self getNOselectinfo];
-        [dic setValue:self.backArry forKey:@"selectedValue"];
-        [dic setValue:@"confirm" forKey:@"type"];
-        
-        [dic setValue:[self getselectIndexArry] forKey:@"selectedIndex"];
-        
-        self.bolock(dic);
-    }
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [UIView animateWithDuration:.2f animations:^{
-            
-            [self setFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, pickerHeight)];
-        }];
-    });
-    self.pickerBgView.hidden=YES;
-}
 -(void)selectRow
 {
     if (_Correlation) {
@@ -675,207 +563,111 @@
     }
 }
 
--(void)setBgView:(UIView *)bgView
-{
-    self.pickerBgView = bgView;
-}
-
 //三行时候的选择哪个的逻辑
 -(void)selectValueThree
 {
-    NSString *selectStr=[NSString stringWithFormat:@"%@",self.selectValueArry.firstObject];
     
-    for (NSInteger i=0; i<self.provinceArray.count; i++) {
-        NSString *str=[NSString stringWithFormat:@"%@",[self.provinceArray objectAtIndex:i]];
-        if ([selectStr isEqualToString:str]) {
-            _num=i;
-            [_pick reloadAllComponents];
-            
-            [_pick selectRow:i  inComponent:0 animated:NO];
-            break;
-        }
+    NSInteger selectIndex = [self.selectValueArry[0] integerValue];
+    _num = selectIndex;
+    if (self.provinceArray.count>selectIndex) {
+        [_pick reloadAllComponents];
+        [_pick selectRow:selectIndex inComponent:0 animated:NO];
     }
     
+    NSString * selectStr = [self.provinceArray firstObject];
     NSArray *selecityAry = [[self.dataDry objectAtIndex:_num] objectForKey:selectStr];
-    
     if (selecityAry.count>0) {
-        
         [self.cityArray removeAllObjects];
-        
         for (NSInteger i=0; i<selecityAry.count; i++) {
-            
             NSDictionary *dic=selecityAry[i];
-            
             NSArray *ary=[dic allKeys];
-            
             [self.cityArray addObject:[ary firstObject]];
         }
     }
     
-    NSString *selectStrTwo;
-    
+    NSInteger selectIndexTwo = 0;
     if (self.selectValueArry.count>1) {
-        
-        selectStrTwo=[NSString stringWithFormat:@"%@",self.selectValueArry[1]];
+        selectIndexTwo = [self.selectValueArry[1] integerValue];
     }
-    for (NSInteger i=0; i<self.cityArray.count; i++) {
-        
-        NSString *str=[NSString stringWithFormat:@"%@",[self.cityArray objectAtIndex:i]];
-        if ([selectStrTwo isEqualToString:str]) {
-            
-            _threenum=i;
-            
-            [_pick reloadAllComponents];
-            
-            [_pick selectRow:i  inComponent:1 animated:NO];
-            
-            break;
-        }
+    if (self.cityArray.count>selectIndexTwo) {
+        _threenum = selectIndexTwo;
+        [_pick reloadAllComponents];
+        [_pick selectRow:selectIndexTwo  inComponent:1 animated:NO];
     }
     
     if (selecityAry.count>0) {
-        
         if (self.selectValueArry.count>1) {
-            
             NSArray *arry =[[selecityAry objectAtIndex:_threenum] objectForKey:[self.selectValueArry objectAtIndex:1]];
-            
             self.townArray=arry;
-            
         }
     }
     
-    NSString *selectStrThree;
-    
-    
+    NSInteger selectIndexThree = 0;
     if (self.selectValueArry.count>2) {
-        selectStrThree=[NSString stringWithFormat:@"%@",self.selectValueArry[2]];
+        selectIndexThree = [[self.selectValueArry objectAtIndex:2] integerValue];
     }
-    
     if (self.townArray.count>0) {
-        
-        for (NSInteger i=0; i<self.townArray.count; i++) {
-            
-            NSString *str=[NSString stringWithFormat:@"%@",[self.townArray objectAtIndex:i]];
-            if ([selectStrThree isEqualToString:str]) {
-                
-                [_pick reloadAllComponents];
-                
-                [_pick selectRow:i  inComponent:2 animated:NO];
-                
-                break;
-            }
-        }
-    }else
-    {
-        NSArray *threekey=[[selecityAry objectAtIndex:0]allKeys];
+        [_pick reloadAllComponents];
+        [_pick selectRow:selectIndexThree  inComponent:2 animated:NO];
+    } else {
+        NSArray *threekey = [[selecityAry objectAtIndex:0] allKeys];
         self.townArray=[[selecityAry objectAtIndex:0]objectForKey:[threekey firstObject]];
+        [_pick reloadAllComponents];
+        [_pick selectRow:selectIndexThree  inComponent:2 animated:NO];
     }
     [_pick reloadAllComponents];
 }
 //两行时候的选择哪个的逻辑
 -(void)selectValueTwo
 {
-    
-    NSString *selectStr=[NSString stringWithFormat:@"%@",self.selectValueArry.firstObject];
-    
-    for (NSInteger i=0; i<self.provinceArray.count; i++) {
-        NSString *str=[NSString stringWithFormat:@"%@",[self.provinceArray objectAtIndex:i]];
-        if ([selectStr isEqualToString:str]) {
-            
-            [_pick reloadAllComponents];
-            [_pick selectRow:i  inComponent:0 animated:NO];
-            _num=i;
-            break;
-        }
+    NSInteger selectIndex = [[self.selectValueArry firstObject] integerValue];
+    _num = selectIndex;
+    NSString * selectStr;
+    if (self.provinceArray.count>selectIndex) {
+        selectStr = [self.provinceArray objectAtIndex:selectIndex];
+        [_pick reloadAllComponents];
+        [_pick selectRow:selectIndex inComponent:0 animated:NO];
     }
+    
     NSArray *twoArry=[[self.dataDry objectAtIndex:_num]objectForKey:selectStr];
     
     if (twoArry&&twoArry.count>0) {
-        
         [self.cityArray removeAllObjects];
         [self.cityArray addObjectsFromArray:twoArry];
     }
     
-    NSString *selectTwoStr;
-    if (self.selectValueArry.count>1) {
-        
-        selectTwoStr =[NSString stringWithFormat:@"%@",[self.selectValueArry objectAtIndex:1]];
+    if (self.selectValueArry.count>1 && self.selectValueArry.count>1) {
+        NSInteger selectTwoIndex = [[self.selectValueArry objectAtIndex:1] integerValue];
+        [_pick reloadAllComponents];
+        [_pick selectRow:selectTwoIndex inComponent:1 animated:NO];
     }
     
-    for (NSInteger i=0; i<self.cityArray.count; i++) {
-        
-        NSString *str=[NSString stringWithFormat:@"%@",[self.cityArray objectAtIndex:i]];
-        
-        if ([selectTwoStr isEqualToString:str]) {
-            
-            [_pick reloadAllComponents];
-            [_pick selectRow:i inComponent:1 animated:NO];
-            
-            break;
-        }
-    }
 }
 //一行时候的选择哪个的逻辑
 -(void)selectValueOne
 {
     if (_noArryElementBool) {
         //这里表示数组里面就只有一个数组 比较特殊的情况[]
-        NSString *selectStr;
+        NSInteger selectIndex;
         if (self.selectValueArry.count>0) {
-            
-            selectStr=[NSString stringWithFormat:@"%@",[self.selectValueArry firstObject]];
+            selectIndex = [self.selectValueArry[0] integerValue];
+            [_pick reloadAllComponents];
+            [_pick selectRow:selectIndex inComponent:0 animated:NO];
         }
-        for (NSInteger i=0; i<self.noCorreArry.count; i++) {
-            NSString *str=[NSString stringWithFormat:@"%@",[self.noCorreArry objectAtIndex:i]];
-            if ([selectStr isEqualToString:str]) {
-                [_pick reloadAllComponents];
-                [_pick selectRow:i  inComponent:0 animated:NO];
-                break;
-            }
-        }
-        
     }else{
         //这里就比较复杂了 [[],[],[]]
         if (self.selectValueArry.count>0) {
-            
             if (self.selectValueArry.count>self.noCorreArry.count) {
-                
                 for (NSInteger i=0; i<self.noCorreArry.count; i++) {
-                    
-                    NSString *selectStr=[NSString stringWithFormat:@"%@",[self.selectValueArry objectAtIndex:i]];
-                    
-                    NSArray *arry=[self.noCorreArry objectAtIndex:i];
-                    
-                    for (NSInteger j=0; j<arry.count; j++) {
-                        
-                        NSString *str=[NSString stringWithFormat:@"%@",[arry objectAtIndex:j]];
-                        
-                        if ([selectStr isEqualToString:str]) {
-                            [_pick reloadAllComponents];
-                            [_pick selectRow:j inComponent:i animated:YES];
-                            
-                            break;
-                        }
-                    }
+                    NSInteger selectIndex = [self.selectValueArry[i] integerValue];
+                    [_pick reloadAllComponents];
+                    [_pick selectRow:selectIndex inComponent:i animated:YES];
                 }
             }else{
                 for (NSInteger i=0; i<self.selectValueArry.count; i++) {
-                    
-                    NSString *selectStr=[NSString stringWithFormat:@"%@",[self.selectValueArry objectAtIndex:i]];
-                    
-                    NSArray *arry=[self.noCorreArry objectAtIndex:i];
-                    
-                    for (NSInteger j=0; j<arry.count; j++) {
-                        
-                        NSString *str=[NSString stringWithFormat:@"%@",[arry objectAtIndex:j]];
-                        
-                        if ([selectStr isEqualToString:str]) {
-                            [_pick reloadAllComponents];
-                            [_pick selectRow:j inComponent:i animated:YES];
-                            
-                            break;
-                        }
-                    }
+                    NSInteger selectIndex = [self.selectValueArry[i] integerValue];
+                    [_pick reloadAllComponents];
+                    [_pick selectRow:selectIndex inComponent:i animated:YES];
                 }
             }
         }
@@ -964,7 +756,7 @@
     //分界选中线颜色
     ((UILabel *)[pickerView.subviews objectAtIndex:1]).backgroundColor = [UIColor colorWithWhite:0.7 alpha:1];
     
-     //分界选中线颜色
+    //分界选中线颜色
     ((UILabel *)[pickerView.subviews objectAtIndex:2]).backgroundColor = [UIColor colorWithWhite:0.7 alpha:1];
     
     //重新加载lbl的文字内容

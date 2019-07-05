@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		17D41E591D7EE0CA0031415E /* RCTBEEPickerManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 17D41E581D7EE0CA0031415E /* RCTBEEPickerManager.h */; };
-		17D41E5B1D7EE0CA0031415E /* RCTBEEPickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D41E5A1D7EE0CA0031415E /* RCTBEEPickerManager.m */; };
 		17D41E631D7EE0EE0031415E /* BzwPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D41E621D7EE0EE0031415E /* BzwPicker.m */; };
+		CF6FDFEA22CF6D1100A95C44 /* MCPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6FDFE922CF6D1100A95C44 /* MCPickerView.m */; };
+		CF6FDFED22CF6D3F00A95C44 /* MCPickerViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6FDFEC22CF6D3F00A95C44 /* MCPickerViewManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -19,7 +19,6 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				17D41E591D7EE0CA0031415E /* RCTBEEPickerManager.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -27,10 +26,12 @@
 
 /* Begin PBXFileReference section */
 		17D41E551D7EE0CA0031415E /* libRCTBEEPickerManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTBEEPickerManager.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		17D41E581D7EE0CA0031415E /* RCTBEEPickerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTBEEPickerManager.h; sourceTree = "<group>"; };
-		17D41E5A1D7EE0CA0031415E /* RCTBEEPickerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTBEEPickerManager.m; sourceTree = "<group>"; };
 		17D41E611D7EE0EE0031415E /* BzwPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BzwPicker.h; sourceTree = "<group>"; };
 		17D41E621D7EE0EE0031415E /* BzwPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BzwPicker.m; sourceTree = "<group>"; };
+		CF6FDFE822CF6D1100A95C44 /* MCPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCPickerView.h; sourceTree = "<group>"; };
+		CF6FDFE922CF6D1100A95C44 /* MCPickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCPickerView.m; sourceTree = "<group>"; };
+		CF6FDFEB22CF6D3F00A95C44 /* MCPickerViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCPickerViewManager.h; sourceTree = "<group>"; };
+		CF6FDFEC22CF6D3F00A95C44 /* MCPickerViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCPickerViewManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,8 +66,10 @@
 			children = (
 				17D41E611D7EE0EE0031415E /* BzwPicker.h */,
 				17D41E621D7EE0EE0031415E /* BzwPicker.m */,
-				17D41E581D7EE0CA0031415E /* RCTBEEPickerManager.h */,
-				17D41E5A1D7EE0CA0031415E /* RCTBEEPickerManager.m */,
+				CF6FDFE822CF6D1100A95C44 /* MCPickerView.h */,
+				CF6FDFE922CF6D1100A95C44 /* MCPickerView.m */,
+				CF6FDFEB22CF6D3F00A95C44 /* MCPickerViewManager.h */,
+				CF6FDFEC22CF6D3F00A95C44 /* MCPickerViewManager.m */,
 			);
 			path = RCTBEEPickerManager;
 			sourceTree = "<group>";
@@ -110,6 +113,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 17D41E4C1D7EE0CA0031415E;
@@ -127,8 +131,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17D41E5B1D7EE0CA0031415E /* RCTBEEPickerManager.m in Sources */,
+				CF6FDFEA22CF6D1100A95C44 /* MCPickerView.m in Sources */,
 				17D41E631D7EE0EE0031415E /* BzwPicker.m in Sources */,
+				CF6FDFED22CF6D3F00A95C44 /* MCPickerViewManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +265,7 @@
 				17D41E601D7EE0CA0031415E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

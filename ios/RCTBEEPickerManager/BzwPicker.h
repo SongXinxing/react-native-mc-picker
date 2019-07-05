@@ -33,13 +33,6 @@ typedef void(^backBolock)(NSDictionary * );
 
 @property (strong,nonatomic)NSArray *selectArry;//2级联动时候用的
 
-@property (strong,nonatomic)UIButton *leftBtn;//取消
-@property (strong,nonatomic)UIButton *rightBtn;
-@property(strong,nonatomic)UIView *pickerBgView;
-
-@property(strong,nonatomic)NSString *leftStr;
-@property(strong,nonatomic)NSString *centStr;
-@property(strong,nonatomic)NSString *rightStr;
 @property(strong,nonatomic)NSString *pickerToolBarFontSize;
 @property(strong,nonatomic)NSString *pickerFontSize;
 @property(strong,nonatomic)NSString *pickerFontFamily;
@@ -82,10 +75,10 @@ typedef void(^backBolock)(NSDictionary * );
 
 
 - (NSInteger)numberOfRowsInComponent:(NSInteger)component;
-- (NSInteger)selectedRowInComponent:(NSInteger)component; 
+- (NSInteger)selectedRowInComponent:(NSInteger)component;
 
--(instancetype)initWithFrame:(CGRect)frame dic:(NSDictionary *)dic leftStr:(NSString *)leftStr centerStr:(NSString *)centerStr rightStr:(NSString *)rightStr topbgColor:(NSArray *)topbgColor bottombgColor:(NSArray *)bottombgColor leftbtnbgColor:(NSArray *)leftbtnbgColor rightbtnbgColor:(NSArray *)rightbtnbgColor centerbtnColor:(NSArray *)centerbtnColor selectValueArry:(NSArray *)selectValueArry  weightArry:(NSArray *)weightArry
-       pickerToolBarFontSize:(NSString *)pickerToolBarFontSize  pickerFontSize:(NSString *)pickerFontSize  pickerFontColor:(NSArray *)pickerFontColor  pickerRowHeight:(NSString *)pickerRowHeight  pickerFontFamily:(NSString *)pickerFontFamilym;
+-(instancetype)initWithFrame:(CGRect)frame dic:(NSDictionary *)dic selectValueArry:(NSArray *)selectValueArry  weightArry:(NSArray *)weightArry
+       pickerToolBarFontSize:(NSString *)pickerToolBarFontSize  pickerFontSize:(NSString *)pickerFontSize  pickerFontColor:(NSArray *)pickerFontColor pickerRowHeight:(NSString *)pickerRowHeight pickerFontFamily:(NSString *)pickerFontFamily;
 
 -(void)selectRow;
 -(void)setBgView:(UIView *)bgView;

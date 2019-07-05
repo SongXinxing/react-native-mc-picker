@@ -1,16 +1,19 @@
 import { requireNativeComponent } from 'react-native';
-import React, { Component } from 'react';
+import React, { Component, memo } from 'react';
 
-const RNPickerView = requireNativeComponent("RNPickerView");
+const RNPickerViewBase = requireNativeComponent("RNPickerView");
 
-class PickerView extends Component {
+// pickerData
+// isLoop
+// selectedValue
+// pickerFontColor
+// pickerFontSize
 
-  _onPickerSelect(event) {
-    if (!this.props.onPickerSelect) {
-      return;
-    }
+class MCPickerView extends Component {
+  _onPickerSelect = (event) => {
+    event.persist();
     let nativeEvent = event.nativeEvent;
-    this.props.onPickerSelect(nativeEvent);
+    this.props.onPickerSelect && this.props.onPickerSelect(nativeEvent);
   }
 
   render() {
@@ -19,12 +22,12 @@ class PickerView extends Component {
     let width = style.width ? style.width : '100%'
 
     return (
-      <RNPickerView
+      <RNPickerViewBase
         {...this.props}
         style={[{ height, width }, this.props.style]}
-        onPickerSelect={(event) => this._onPickerSelect(event)} />
+        onPickerSelect={this._onPickerSelect} />
     )
   }
 }
 
-module.exports = PickerView;
+module.exports = MCPickerView
