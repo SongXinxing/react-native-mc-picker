@@ -75,10 +75,9 @@ typedef void(^backBolock)(NSDictionary * );
 
 
 - (NSInteger)numberOfRowsInComponent:(NSInteger)component;
-- (NSInteger)selectedRowInComponent:(NSInteger)component;
+- (NSInteger)selectedRowInComponent:(NSInteger)component; 
 
--(instancetype)initWithFrame:(CGRect)frame dic:(NSDictionary *)dic selectValueArry:(NSArray *)selectValueArry  weightArry:(NSArray *)weightArry
-       pickerToolBarFontSize:(NSString *)pickerToolBarFontSize  pickerFontSize:(NSString *)pickerFontSize  pickerFontColor:(NSArray *)pickerFontColor pickerRowHeight:(NSString *)pickerRowHeight pickerFontFamily:(NSString *)pickerFontFamily;
+-(instancetype)initWithFrame:(CGRect)frame dic:(NSDictionary *)dic selectValueArry:(NSArray *)selectValueArry  weightArry:(NSArray *)weightArry pickerFontSize:(NSString *)pickerFontSize  pickerFontColor:(NSArray *)pickerFontColor pickerRowHeight:(NSString *)pickerRowHeight pickerFontFamily:(NSString *)pickerFontFamily;
 
 -(void)selectRow;
 -(void)setBgView:(UIView *)bgView;

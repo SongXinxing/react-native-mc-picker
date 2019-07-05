@@ -29,11 +29,6 @@
 
 -(instancetype)init {
     self = [super init];
-    
-    //    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    //    label.text = @"star";
-    //    [self addSubview:label];
-    
     return self;
 }
 
@@ -50,20 +45,18 @@
     NSDictionary * dataDic=[[NSMutableDictionary alloc]init];
     [dataDic setValue:pickerData forKey:@"pickerData"];
     _pickerData = dataDic;
-    NSArray * colorA = @[@1, @186, @245, @1];
-    
     _pick = [[BzwPicker alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)
-                                         dic:_pickerData selectValueArry:@[@1] weightArry:@[@1,@1,@1] pickerToolBarFontSize:@"12" pickerFontSize:@"12" pickerFontColor:colorA pickerRowHeight:@"30" pickerFontFamily:@""];
+                                         dic:_pickerData selectValueArry:@[@1] weightArry:@[@1,@1,@1] pickerFontSize:@16 pickerFontColor:@[@31,@31,@31,@1] pickerRowHeight:@"30" pickerFontFamily:@""];
     _pick.bolock=^(NSDictionary *backinfoArry){
         if (self.onPickerSelect) {
             self.onPickerSelect(backinfoArry);
         }
     };
+    if (_selectValue) {
+        _pick.selectValueArry = _selectValue;
+        [_pick selectRow];
+    }
     [self addSubview:_pick];
-}
--(void) setPickerFontSize:(NSString *)pickerFontSize
-{
-    _pickerFontSize = pickerFontSize;
 }
 
 @end

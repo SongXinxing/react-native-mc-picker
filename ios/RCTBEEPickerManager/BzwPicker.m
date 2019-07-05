@@ -13,11 +13,11 @@
 
 @implementation BzwPicker
 
--(instancetype)initWithFrame:(CGRect)frame dic:(NSDictionary *)dic selectValueArry:(NSArray *)selectValueArry  weightArry:(NSArray *)weightArry
-       pickerToolBarFontSize:(NSString *)pickerToolBarFontSize  pickerFontSize:(NSString *)pickerFontSize  pickerFontColor:(NSArray *)pickerFontColor pickerRowHeight:(NSString *)pickerRowHeight pickerFontFamily:(NSString *)pickerFontFamily
+-(instancetype)initWithFrame:(CGRect)frame dic:(NSDictionary *)dic selectValueArry:(NSArray *)selectValueArry  weightArry:(NSArray *)weightArry pickerFontSize:(NSString *)pickerFontSize  pickerFontColor:(NSArray *)pickerFontColor pickerRowHeight:(NSString *)pickerRowHeight pickerFontFamily:(NSString *)pickerFontFamily
+
 {
     self = [super initWithFrame:frame];
-    //    self = [super initWithFrame:super.frame];
+//    self = [super initWithFrame:super.frame];
     if (self)
     {
         self.backArry=[[NSMutableArray alloc]init];
@@ -26,7 +26,6 @@
         self.selectValueArry=selectValueArry;
         self.weightArry=weightArry;
         self.pickerDic=dic;
-        self.pickerToolBarFontSize=pickerToolBarFontSize;
         self.pickerFontSize=pickerFontSize;
         self.pickerFontFamily=pickerFontFamily;
         self.pickerFontColor=pickerFontColor;
@@ -46,7 +45,7 @@
     self.pick = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
     self.pick.delegate = self;
     self.pick.dataSource = self;
-    //    self.pick.showsSelectionIndicator=YES;
+//    self.pick.showsSelectionIndicator=YES;
     [self addSubview:self.pick];
     
 }
@@ -195,12 +194,12 @@
                 NSString *twostr=[NSString stringWithFormat:@"%@",self.weightArry[1]];
                 
                 double totalweight=onestr.doubleValue+twostr.doubleValue;
-                //                 if (component==0) {
-                //                     return _lineWith*onestr.doubleValue/totalweight;
-                //                 }else{
-                //                     return _lineWith*twostr.doubleValue/totalweight;
-                //                 }
-                return columnWidth;
+//                 if (component==0) {
+//                     return _lineWith*onestr.doubleValue/totalweight;
+//                 }else{
+//                     return _lineWith*twostr.doubleValue/totalweight;
+//                 }
+                   return columnWidth;
             }
             else{
                 if (self.weightArry.count>0) {
@@ -415,7 +414,7 @@
     
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     [dic setValue:self.backArry forKey:@"selectedValue"];
-    
+
     NSMutableArray *value = [self getselectIndexArry];
     
     if([value count] == 0) {
@@ -573,7 +572,7 @@
         [_pick reloadAllComponents];
         [_pick selectRow:selectIndex inComponent:0 animated:NO];
     }
-    
+
     NSString * selectStr = [self.provinceArray firstObject];
     NSArray *selecityAry = [[self.dataDry objectAtIndex:_num] objectForKey:selectStr];
     if (selecityAry.count>0) {
@@ -628,9 +627,9 @@
         [_pick reloadAllComponents];
         [_pick selectRow:selectIndex inComponent:0 animated:NO];
     }
-    
+
     NSArray *twoArry=[[self.dataDry objectAtIndex:_num]objectForKey:selectStr];
-    
+
     if (twoArry&&twoArry.count>0) {
         [self.cityArray removeAllObjects];
         [self.cityArray addObjectsFromArray:twoArry];
@@ -641,7 +640,7 @@
         [_pick reloadAllComponents];
         [_pick selectRow:selectTwoIndex inComponent:1 animated:NO];
     }
-    
+
 }
 //一行时候的选择哪个的逻辑
 -(void)selectValueOne
@@ -756,7 +755,7 @@
     //分界选中线颜色
     ((UILabel *)[pickerView.subviews objectAtIndex:1]).backgroundColor = [UIColor colorWithWhite:0.7 alpha:1];
     
-    //分界选中线颜色
+     //分界选中线颜色
     ((UILabel *)[pickerView.subviews objectAtIndex:2]).backgroundColor = [UIColor colorWithWhite:0.7 alpha:1];
     
     //重新加载lbl的文字内容
