@@ -1,15 +1,20 @@
-import { requireNativeComponent } from 'react-native';
+import {
+  requireNativeComponent,
+  Platform,
+  ViewPropTypes
+} from 'react-native';
 import React, { Component, memo } from 'react';
+import PropTypes from 'prop-types'
 
-const RNPickerViewBase = requireNativeComponent("RNPickerView");
+let RNPickerViewBase
+if (Platform.OS === 'ios') {
+  RNPickerViewBase = requireNativeComponent("MCPickerView");
+} else {
+  RNPickerViewBase = requireNativeComponent("RNPickerView");
+}
 
-// pickerData
-// isLoop
-// selectedValue
-// pickerFontColor
-// pickerFontSize
 
-class MCPickerView extends Component {
+class MCPicker extends Component {
   _onPickerSelect = (event) => {
     event.persist();
     let nativeEvent = event.nativeEvent;
@@ -17,17 +22,31 @@ class MCPickerView extends Component {
   }
 
   render() {
-    let style = this.props.style ? this.props.style : {};
-    let height = style.height ? style.height : 200
-    let width = style.width ? style.width : '100%'
-
+    let {
+      style = null,
+      pickerFontColor = [31, 31, 31, 1],
+      pickerFontSize = 16,
+      ...props
+    } = this.props
     return (
       <RNPickerViewBase
-        {...this.props}
-        style={[{ height, width }, this.props.style]}
+        {...props}
+        style={[{ height: 200, width: '100%' }, style]}
+        pickerFontColor={pickerFontColor}
+        pickerFontSize={pickerFontSize}
         onPickerSelect={this._onPickerSelect} />
     )
   }
 }
 
-module.exports = MCPickerView
+
+MCPicker.propTypes = {
+  ...ViewPropTypes,
+  pickerData: PropTypes.array.isRequired,
+  isLoop: PropTypes.bool, // android only
+  selectedValue: PropTypes.array,
+  pickerFontColor: PropTypes.array, // [31, 31, 31, 1]
+  pickerFontSize: PropTypes.string
+}
+
+module.exports = MCPicker

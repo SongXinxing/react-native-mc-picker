@@ -1,86 +1,37 @@
-declare module 'react-native-mc-picker' {
-  import { Component } from 'react'
-  import { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes'
+import * as React from 'react'
+import {
+    FlexStyle,
+    ShadowStyleIOS,
+    Picker,
+    StyleProp,
+    TransformsStyle,
+} from 'react-native'
 
-  export interface PickerViewProperties {
-    pickerFontSize?: number;
-
-    pickerData?: any[];
-
-    selectedValue?: any[];
-
-    isLoop?: boolean;
-
-    style?: StyleObj;
-
-    onPickerSelect?(data: any[]): void;
-  }
-
-  export class PickerView extends Component<PickerViewProperties> {
-  }
-
-  interface PickerOptions {
-
-    pickerData?: any[]
-
-
-    selectedValue?: any[]
-
-
-    pickerTitleText?: string
-
-    pickerConfirmBtnText?: string
-
-
-    pickerCancelBtnText?: string
-
-    pickerConfirmBtnColor?: number[]
-
-
-    pickerCancelBtnColor?: number[]
-
-    pickerTitleColor?: number[]
-
-
-    pickerToolBarBg?: number[]
-
-    pickerBg?: number[]
-
-
-    pickerToolBarFontSize?: number
-
-
-    pickerFontSize?: number
-
-    pickerRowHeight?: number
-
-    pickerFontColor?: number[]
-
-
-    onPickerConfirm?(item: any[]): void
-
-    onPickerCancel?(item: any[]): void
-
-
-    onPickerSelect?(item: any[]): void
-  }
-
-  export class NativePicker {
-
-    static init(options: PickerOptions): void
-
-
-    static show(): void
-
-    static hide(): void
-
-
-    static toggle(): void
-
-
-    static select(item: any[]): void
-
-    static isPickerShow(fn?: (err: any, message: any) => void): boolean
-  }
+export interface MCPickerStyle extends FlexStyle, TransformsStyle, ShadowStyleIOS {
 }
 
+export interface MCPickerProperties {
+
+  pickerFontSize?: string;
+
+  pickerFontColor?: Array<number>;
+
+  pickerData?: Array;
+
+  selectedValue?: Array<number>;
+
+  isLoop?: boolean;
+
+  style?: StyleProp<MCPickerStyle>;
+
+  onPickerSelect?: (data: []) => void;
+}
+
+interface MCPickerStatic extends React.ComponentClass<MCPickerProperties> {
+}
+
+declare var MCPicker: MCPickerStatic
+
+type MCPicker = MCPickerStatic
+
+export default MCPicker
