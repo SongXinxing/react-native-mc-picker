@@ -16,12 +16,12 @@
 
 @property (nonatomic, strong) NSDictionary * pickerData; // 数据源
 
-@property(strong,nonatomic)NSString *pickerFontSize;
-@property(strong,nonatomic)NSString *pickerFontFamily;
-@property(strong,nonatomic)NSArray *pickerFontColor;
-@property(strong,nonatomic)NSString *pickerRowHeight;
+@property(strong, nonatomic)NSString *pickerFontSize;
+@property(strong, nonatomic)NSString *pickerFontFamily;
+@property(strong, nonatomic)NSArray *pickerFontColor;
+@property(strong, nonatomic)NSString *pickerRowHeight;
 
-@property(nonatomic,strong)BzwPicker *pick;
+@property(nonatomic, strong)BzwPicker *pick;
 
 @end
 
@@ -29,6 +29,7 @@
 
 -(instancetype)init {
     self = [super init];
+    _pickerRowHeight = @"30";
     return self;
 }
 
@@ -45,18 +46,43 @@
     NSDictionary * dataDic=[[NSMutableDictionary alloc]init];
     [dataDic setValue:pickerData forKey:@"pickerData"];
     _pickerData = dataDic;
-    _pick = [[BzwPicker alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)
-                                         dic:_pickerData selectValueArry:@[@1] weightArry:@[@1,@1,@1] pickerFontSize:@16 pickerFontColor:@[@31,@31,@31,@1] pickerRowHeight:@"30" pickerFontFamily:@""];
+    if (_pick) {
+        [self initPick];
+    }
+}
+// 字体 颜色
+//-(void) setPickerFontColor:(NSArray *)pickerFontColor {
+//    _pickerFontColor = pickerFontColor;
+//}
+// 字体 大小
+-(void) setPickerFontSize:(NSString *)pickerFontSize {
+    _pickerFontSize = pickerFontSize;
+    if (_pick) {
+        [self.pick resetFontSize:pickerFontSize];
+    }
+}
+
+// 所有属性改变之后调用
+-(void) didSetProps: (NSArray<NSString *> *)changedProps {
+}
+
+- (void)initPick {
+    if (_pick != nil) {
+        [self.pick removeFromSuperview];
+    }
+    _pick = [[BzwPicker alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) dic:_pickerData selectValueArry:_selectValue weightArry:@[@1,@1,@1] pickerFontSize:_pickerFontSize pickerFontColor:_pickerFontColor pickerRowHeight:_pickerRowHeight pickerFontFamily:@""];
+    __weak typeof(self) weakSelf = self;
     _pick.bolock=^(NSDictionary *backinfoArry){
-        if (self.onPickerSelect) {
-            self.onPickerSelect(backinfoArry);
+        if (weakSelf.onPickerSelect) {
+            weakSelf.onPickerSelect(backinfoArry);
         }
     };
-    if (_selectValue) {
-        _pick.selectValueArry = _selectValue;
-        [_pick selectRow];
-    }
-    [self addSubview:_pick];
+    [self addSubview: _pick];
+}
+
+-(void)layoutSubviews {
+    [super layoutSubviews];
+    [self initPick];
 }
 
 @end

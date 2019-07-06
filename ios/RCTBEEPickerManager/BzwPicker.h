@@ -72,13 +72,8 @@ typedef void(^backBolock)(NSDictionary * );
 
 @property(assign,nonatomic)NSInteger seleNum;//用来做索引下标用
 
-
-
-- (NSInteger)numberOfRowsInComponent:(NSInteger)component;
-- (NSInteger)selectedRowInComponent:(NSInteger)component; 
-
 -(instancetype)initWithFrame:(CGRect)frame dic:(NSDictionary *)dic selectValueArry:(NSArray *)selectValueArry  weightArry:(NSArray *)weightArry pickerFontSize:(NSString *)pickerFontSize  pickerFontColor:(NSArray *)pickerFontColor pickerRowHeight:(NSString *)pickerRowHeight pickerFontFamily:(NSString *)pickerFontFamily;
 
 -(void)selectRow;
--(void)setBgView:(UIView *)bgView;
+-(void)resetFontSize:(NSString *)fontSize;
 @end

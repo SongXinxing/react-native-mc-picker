@@ -7,9 +7,11 @@
 //
 
 #import "BzwPicker.h"
-#define linSpace 5
-#define pickerHeight 240
-#define columnWidth 125
+#define linSpace 0
+
+@interface BzwPicker()
+
+@end
 
 @implementation BzwPicker
 
@@ -17,7 +19,6 @@
 
 {
     self = [super initWithFrame:frame];
-//    self = [super initWithFrame:super.frame];
     if (self)
     {
         self.backArry=[[NSMutableArray alloc]init];
@@ -40,9 +41,14 @@
     return self;
 }
 
+-(void)resetFontSize:(NSString *)fontSize {
+    self.pickerFontSize = fontSize;
+    [self.pick reloadAllComponents];
+}
+
 -(void)makeuiWith
 {
-    self.pick = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
+    self.pick = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     self.pick.delegate = self;
     self.pick.dataSource = self;
 //    self.pick.showsSelectionIndicator=YES;
@@ -147,7 +153,7 @@
     if (_Correlation) {
         if ([_numberCorrela isEqualToString:@"three"]) {
             
-            _lineWith=SCREEN_WIDTH-2*linSpace;
+            _lineWith = self.frame.size.width - 2 * linSpace;
             
             if (self.weightArry.count>=3) {
                 NSString *onestr=[NSString stringWithFormat:@"%@",[self.weightArry firstObject]];
@@ -188,18 +194,17 @@
         }
         else{
             
-            _lineWith=SCREEN_WIDTH-linSpace;
+            _lineWith = self.frame.size.width - linSpace;
             if (self.weightArry.count>=2) {
                 NSString *onestr=[NSString stringWithFormat:@"%@",[self.weightArry firstObject]];
                 NSString *twostr=[NSString stringWithFormat:@"%@",self.weightArry[1]];
                 
                 double totalweight=onestr.doubleValue+twostr.doubleValue;
-//                 if (component==0) {
-//                     return _lineWith*onestr.doubleValue/totalweight;
-//                 }else{
-//                     return _lineWith*twostr.doubleValue/totalweight;
-//                 }
-                   return columnWidth;
+                 if (component==0) {
+                     return _lineWith*onestr.doubleValue/totalweight;
+                 }else{
+                     return _lineWith*twostr.doubleValue/totalweight;
+                 }
             }
             else{
                 if (self.weightArry.count>0) {
@@ -223,10 +228,10 @@
     }else{
         if (_noArryElementBool) {
             //表示一个数组 特殊情况
-            return SCREEN_WIDTH;
+            return self.frame.size.width;
         }else{
             
-            _lineWith=(SCREEN_WIDTH-linSpace*(self.dataDry.count-1));
+            _lineWith = (self.frame.size.width - linSpace * (self.dataDry.count-1));
             
             if (self.weightArry.count>=self.dataDry.count) {
                 
@@ -415,11 +420,11 @@
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
     [dic setValue:self.backArry forKey:@"selectedValue"];
 
-    NSMutableArray *value = [self getselectIndexArry];
+    NSMutableArray *value = [NSMutableArray arrayWithArray:[self getselectIndexArry]];
     
     if([value count] == 0) {
         value = [[NSMutableArray alloc] init];
-        [dic setValue:[NSNumber numberWithInt:[_pick selectedRowInComponent:0]] forKey:@"selectedIndex"];
+        [dic setValue:[NSNumber numberWithInteger:[_pick selectedRowInComponent:0]] forKey:@"selectedIndex"];
     } else {
         [dic setValue:value forKey:@"selectedIndex"];
     }
@@ -573,7 +578,7 @@
         [_pick selectRow:selectIndex inComponent:0 animated:NO];
     }
 
-    NSString * selectStr = [self.provinceArray firstObject];
+    NSString * selectStr = [self.provinceArray objectAtIndex:selectIndex];
     NSArray *selecityAry = [[self.dataDry objectAtIndex:_num] objectForKey:selectStr];
     if (selecityAry.count>0) {
         [self.cityArray removeAllObjects];
@@ -607,12 +612,12 @@
     }
     if (self.townArray.count>0) {
         [_pick reloadAllComponents];
-        [_pick selectRow:selectIndexThree  inComponent:2 animated:NO];
+        [_pick selectRow:selectIndexThree inComponent:2 animated:NO];
     } else {
-        NSArray *threekey = [[selecityAry objectAtIndex:0] allKeys];
-        self.townArray=[[selecityAry objectAtIndex:0]objectForKey:[threekey firstObject]];
+        NSArray *threekey = [[selecityAry objectAtIndex:selectIndexTwo] allKeys];
+        self.townArray=[[selecityAry objectAtIndex:selectIndexTwo]objectForKey:[threekey firstObject]];
         [_pick reloadAllComponents];
-        [_pick selectRow:selectIndexThree  inComponent:2 animated:NO];
+        [_pick selectRow:selectIndexThree inComponent:2 animated:NO];
     }
     [_pick reloadAllComponents];
 }
@@ -660,13 +665,13 @@
                 for (NSInteger i=0; i<self.noCorreArry.count; i++) {
                     NSInteger selectIndex = [self.selectValueArry[i] integerValue];
                     [_pick reloadAllComponents];
-                    [_pick selectRow:selectIndex inComponent:i animated:YES];
+                    [_pick selectRow:selectIndex inComponent:i animated:NO];
                 }
             }else{
                 for (NSInteger i=0; i<self.selectValueArry.count; i++) {
                     NSInteger selectIndex = [self.selectValueArry[i] integerValue];
                     [_pick reloadAllComponents];
-                    [_pick selectRow:selectIndex inComponent:i animated:YES];
+                    [_pick selectRow:selectIndex inComponent:i animated:NO];
                 }
             }
         }
@@ -750,7 +755,7 @@
         lbl = [[UILabel alloc]init];
         lbl.font = [UIFont systemFontOfSize:[_pickerFontSize integerValue]];
         lbl.textColor = [UIColor blackColor];
-        lbl.textAlignment = UITextAlignmentCenter;
+        lbl.textAlignment = NSTextAlignmentCenter;
     }
     //分界选中线颜色
     ((UILabel *)[pickerView.subviews objectAtIndex:1]).backgroundColor = [UIColor colorWithWhite:0.7 alpha:1];
@@ -779,4 +784,5 @@
     }
     return NO;
 }
+
 @end
