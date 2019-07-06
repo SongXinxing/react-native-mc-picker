@@ -7,6 +7,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "meicai",
-  "license": "Apache2.0"
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:SongXinxing/react-native-mc-picker.git"
+  },
+  "author": "杨新宇、宋新星",
+  "license": "MIT",
+  "homepage": "https://github.com/SongXinxing/react-native-mc-picker"
 }
