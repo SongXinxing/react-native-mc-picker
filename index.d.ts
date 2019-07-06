@@ -16,7 +16,7 @@ export interface MCPickerProperties {
 
   pickerFontColor?: Array<number>;
 
-  pickerData?: Array;
+  pickerData?: any[];
 
   selectedValue?: Array<number>;
 
