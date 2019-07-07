@@ -7,7 +7,7 @@
 //
 
 #import "BzwPicker.h"
-#define linSpace 0
+#define linSpace 5
 
 @interface BzwPicker()
 
