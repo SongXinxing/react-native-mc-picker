@@ -9,13 +9,9 @@
 #import "BzwPicker.h"
 #define linSpace 5
 
-@interface BzwPicker()
-
-@end
-
 @implementation BzwPicker
 
--(instancetype)initWithFrame:(CGRect)frame dic:(NSDictionary *)dic selectValueArry:(NSArray *)selectValueArry  weightArry:(NSArray *)weightArry pickerFontSize:(NSString *)pickerFontSize  pickerFontColor:(NSArray *)pickerFontColor pickerRowHeight:(NSString *)pickerRowHeight pickerFontFamily:(NSString *)pickerFontFamily
+-(instancetype)initWithFrame:(CGRect)frame dic:(NSDictionary *)dic selectValueArry:(NSArray *)selectValueArry  weightArry:(NSArray *)weightArry pickerFontSize:(NSString *)pickerFontSize  pickerFontColor:(NSArray *)pickerFontColor pickerRowHeight:(NSString *)pickerRowHeight pickerRowWidth:(NSString *)pickerRowWidth pickerFontFamily:(NSString *)pickerFontFamily
 
 {
     self = [super initWithFrame:frame];
@@ -28,6 +24,7 @@
         self.weightArry=weightArry;
         self.pickerDic=dic;
         self.pickerFontSize=pickerFontSize;
+        self.pickerRowWidth=pickerRowWidth;
         self.pickerFontFamily=pickerFontFamily;
         self.pickerFontColor=pickerFontColor;
         self.pickerRowHeight=pickerRowHeight;
@@ -149,7 +146,9 @@
     
 }
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
-    
+    if (self.pickerRowWidth) {
+        return [self.pickerRowWidth floatValue];
+    }
     if (_Correlation) {
         if ([_numberCorrela isEqualToString:@"three"]) {
             
@@ -242,10 +241,8 @@
                     totalweight=totalweight+str.doubleValue;
                 }
                 NSString *comStr=[NSString stringWithFormat:@"%@",[self.weightArry objectAtIndex:component]];
-                
                 return _lineWith*comStr.doubleValue/totalweight;
-            }else
-            {
+            } else {
                 if (self.weightArry.count>0) {
                     NSInteger totalNum=self.weightArry.count;
                     double totalweight=0;

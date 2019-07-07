@@ -20,6 +20,7 @@
 @property(strong, nonatomic)NSString *pickerFontFamily;
 @property(strong, nonatomic)NSArray *pickerFontColor;
 @property(strong, nonatomic)NSString *pickerRowHeight;
+@property(strong, nonatomic)NSString *pickerRowWidth;
 
 @property(nonatomic, strong)BzwPicker *pick;
 
@@ -61,6 +62,18 @@
         [self.pick resetFontSize:pickerFontSize];
     }
 }
+-(void) setPickerRowHeight:(NSString *)pickerRowHeight {
+    _pickerRowHeight = pickerRowHeight;
+    if (_pick) {
+        [self initPick];
+    }
+}
+-(void) setPickerRowWidth:(NSString *)pickerRowWidth {
+    _pickerRowWidth = pickerRowWidth;
+    if (_pick) {
+        [self initPick];
+    }
+}
 
 // 所有属性改变之后调用
 -(void) didSetProps: (NSArray<NSString *> *)changedProps {
@@ -70,7 +83,7 @@
     if (_pick != nil) {
         [self.pick removeFromSuperview];
     }
-    _pick = [[BzwPicker alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) dic:_pickerData selectValueArry:_selectValue weightArry:@[@1,@1,@1] pickerFontSize:_pickerFontSize pickerFontColor:_pickerFontColor pickerRowHeight:_pickerRowHeight pickerFontFamily:@""];
+    _pick = [[BzwPicker alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) dic:_pickerData selectValueArry:_selectValue weightArry:@[@1,@1] pickerFontSize:_pickerFontSize pickerFontColor:_pickerFontColor pickerRowHeight:_pickerRowHeight pickerRowWidth:_pickerRowWidth pickerFontFamily:@""];
     __weak typeof(self) weakSelf = self;
     _pick.bolock=^(NSDictionary *backinfoArry){
         if (weakSelf.onPickerSelect) {

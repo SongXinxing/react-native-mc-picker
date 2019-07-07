@@ -25,5 +25,6 @@ RCT_EXPORT_VIEW_PROPERTY(pickerFontSize, NSString)
 RCT_EXPORT_VIEW_PROPERTY(pickerFontFamily, NSString)
 RCT_EXPORT_VIEW_PROPERTY(pickerFontColor, NSString)
 RCT_EXPORT_VIEW_PROPERTY(pickerRowHeight, NSString)
+RCT_EXPORT_VIEW_PROPERTY(pickerRowWidth, NSString)
 
 @end

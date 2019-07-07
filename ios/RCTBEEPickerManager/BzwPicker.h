@@ -38,6 +38,7 @@ typedef void(^backBolock)(NSDictionary * );
 @property(strong,nonatomic)NSString *pickerFontFamily;
 @property(strong,nonatomic)NSArray *pickerFontColor;
 @property(strong,nonatomic)NSString *pickerRowHeight;
+@property(strong,nonatomic)NSString *pickerRowWidth;
 
 
 
@@ -72,7 +73,7 @@ typedef void(^backBolock)(NSDictionary * );
 
 @property(assign,nonatomic)NSInteger seleNum;//用来做索引下标用
 
--(instancetype)initWithFrame:(CGRect)frame dic:(NSDictionary *)dic selectValueArry:(NSArray *)selectValueArry  weightArry:(NSArray *)weightArry pickerFontSize:(NSString *)pickerFontSize  pickerFontColor:(NSArray *)pickerFontColor pickerRowHeight:(NSString *)pickerRowHeight pickerFontFamily:(NSString *)pickerFontFamily;
+-(instancetype)initWithFrame:(CGRect)frame dic:(NSDictionary *)dic selectValueArry:(NSArray *)selectValueArry  weightArry:(NSArray *)weightArry pickerFontSize:(NSString *)pickerFontSize  pickerFontColor:(NSArray *)pickerFontColor pickerRowHeight:(NSString *)pickerRowHeight pickerRowWidth:(NSString *)pickerRowWidth pickerFontFamily:(NSString *)pickerFontFamily;
 
 -(void)selectRow;
 -(void)resetFontSize:(NSString *)fontSize;
