@@ -1,4 +1,4 @@
-package com.meicai.picker.component;
+package com.meicai.picker;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -12,6 +12,7 @@ import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
+import com.meicai.picker.view.PickerViewLayout;
 import com.meicai.picker.util.PickerUtil;
 import com.meicai.picker.view.OnSelectedListener;
 import com.meicai.picker.view.ReturnData;
@@ -26,7 +27,7 @@ public class RNPickerViewManager extends SimpleViewManager<PickerViewLayout> {
     @Nonnull
     @Override
     public String getName() {
-        return "RNPickerView";
+        return "MCPickerView";
     }
 
     @Nonnull
@@ -54,7 +55,7 @@ public class RNPickerViewManager extends SimpleViewManager<PickerViewLayout> {
 
     @ReactProp(name = "selectedValue")
     public void setSelectValue(PickerViewLayout view, ReadableArray selectValue) {
-        view.setSelectValue(PickerUtil.getSelectedValue(selectValue));
+        view.setSelectIndex(PickerUtil.getSelectedIndex(selectValue));
     }
 
     @ReactProp(name = "pickerFontColor")

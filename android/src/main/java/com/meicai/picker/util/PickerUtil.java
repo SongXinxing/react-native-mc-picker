@@ -46,4 +46,12 @@ public class PickerUtil {
         }
         return selectValue;
     }
+
+    public static int[] getSelectedIndex(ReadableArray array) {
+        int[] selectIndex= new int[array.size()];
+        for (int i = 0; i < array.size(); i++) {
+            selectIndex[i] = array.getInt(i);
+        }
+        return selectIndex;
+    }
 }

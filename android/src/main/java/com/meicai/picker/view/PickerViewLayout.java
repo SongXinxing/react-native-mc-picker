@@ -1,4 +1,4 @@
-package com.meicai.picker.component;
+package com.meicai.picker.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -56,6 +56,11 @@ public class PickerViewLayout extends LinearLayout {
     public void setSelectValue(String[] selectValue) {
         if (pickerViewAlone != null) pickerViewAlone.setSelectValue(selectValue);
         if (pickerViewLinkage != null) pickerViewLinkage.setSelectValue((selectValue));
+    }
+
+    public void setSelectIndex(int[] selectValue) {
+        if (pickerViewAlone != null) pickerViewAlone.setSelectIndex(selectValue);
+        if (pickerViewLinkage != null) pickerViewLinkage.setSelectIndex((selectValue));
     }
 
     public void setTextColor(int color) {
