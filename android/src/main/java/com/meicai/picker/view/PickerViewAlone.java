@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-
 public class PickerViewAlone extends LinearLayout {
 
     private LinearLayout pickerViewAloneLayout;
@@ -156,6 +155,17 @@ public class PickerViewAlone extends LinearLayout {
         }
     }
 
+    public void setSelectIndex(int[] selectIndex) {
+        int viewCount = pickerViewAloneLayout.getChildCount();
+        int indexCount = selectIndex.length;
+        if (indexCount <= viewCount) {
+            setSelectWithIndex(indexCount, selectIndex, curSelectedList);
+        } else {
+            int[] indexs = Arrays.copyOf(selectIndex, viewCount);
+            setSelectWithIndex(viewCount, indexs, curSelectedList);
+        }
+    }
+
     public void setSelectValue(String[] selectValue) {
         int viewCount = pickerViewAloneLayout.getChildCount();
         int valueCount = selectValue.length;
@@ -183,7 +193,33 @@ public class PickerViewAlone extends LinearLayout {
         }
     }
 
-    public void setTextColor(int color){
+    private void setSelectWithIndex(int size, int[] values, ArrayList<ReturnData> curSelectedList) {
+        for (int i = 0; i < size; i++) {
+            View view = pickerViewAloneLayout.getChildAt(i);
+            if (view instanceof LoopView) {
+                LoopView loop = (LoopView) view;
+                int index = values[i];
+                if (loop.hasIndex(index)) {
+                    loop.setSelectedPosition(index);
+                    ReturnData returnData = new ReturnData();
+                    returnData.setItem(loop.getIndexItem(index));
+                    returnData.setIndex(loop.getSelectedIndex());
+                    curSelectedList.set(i, returnData);
+                }
+//                if (loop.hasItem(values[i])) {
+//                    loop.setSelectedItem(values[i]);
+//                    loop.setSelectedPosition(selectedIndex);
+//
+//                    ReturnData returnData = new ReturnData();
+//                    returnData.setItem(values[i]);
+//                    returnData.setIndex(loop.getSelectedIndex());
+//                    curSelectedList.set(i, returnData);
+//                }
+            }
+        }
+    }
+
+    public void setTextColor(int color) {
         int viewCount = pickerViewAloneLayout.getChildCount();
         for (int i = 0; i < viewCount; i++) {
             View view = pickerViewAloneLayout.getChildAt(i);
@@ -194,7 +230,7 @@ public class PickerViewAlone extends LinearLayout {
         }
     }
 
-    public void setTextSize(float size){
+    public void setTextSize(float size) {
         int viewCount = pickerViewAloneLayout.getChildCount();
         for (int i = 0; i < viewCount; i++) {
             View view = pickerViewAloneLayout.getChildAt(i);
@@ -205,7 +241,7 @@ public class PickerViewAlone extends LinearLayout {
         }
     }
 
-    public void setTypeface(Typeface typeface){
+    public void setTypeface(Typeface typeface) {
         int viewCount = pickerViewAloneLayout.getChildCount();
         for (int i = 0; i < viewCount; i++) {
             View view = pickerViewAloneLayout.getChildAt(i);
@@ -216,7 +252,7 @@ public class PickerViewAlone extends LinearLayout {
         }
     }
 
-    public void setTextEllipsisLen(int len){
+    public void setTextEllipsisLen(int len) {
         int viewCount = pickerViewAloneLayout.getChildCount();
         for (int i = 0; i < viewCount; i++) {
             View view = pickerViewAloneLayout.getChildAt(i);
