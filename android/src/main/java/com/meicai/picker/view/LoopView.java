@@ -231,6 +231,10 @@ public class LoopView extends View {
         return result != -1;
     }
 
+    public boolean hasIndex(int index) {
+        return items.size() > index;
+    }
+
     public void setSelectedItem(String item) {
         int selectedIndex = items.indexOf(item);
         setSelectedPosition(selectedIndex);

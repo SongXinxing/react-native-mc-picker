@@ -6,13 +6,7 @@ import {
 import React, { Component, memo } from 'react';
 import PropTypes from 'prop-types'
 
-let RNPickerViewBase
-if (Platform.OS === 'ios') {
-  RNPickerViewBase = requireNativeComponent("MCPickerView");
-} else {
-  RNPickerViewBase = requireNativeComponent("RNPickerView");
-}
-
+let RNPickerViewBase = requireNativeComponent("MCPickerView");
 
 class MCPicker extends Component {
   _onPickerSelect = (event) => {
