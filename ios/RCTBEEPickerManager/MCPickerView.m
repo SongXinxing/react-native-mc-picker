@@ -12,7 +12,7 @@
 
 
 @property (nonatomic, copy) RCTBubblingEventBlock onPickerSelect; // picker 选择触发
-@property (nonatomic, strong) NSArray * selectValue;// 默认选择项
+@property (nonatomic, strong) NSArray * selectedValue;// 默认选择项
 
 @property (nonatomic, strong) NSDictionary * pickerData; // 数据源
 
@@ -34,10 +34,10 @@
     return self;
 }
 
-- (void)setSelectValue:(NSArray *)selectValue {
-    _selectValue = selectValue;
+- (void)setSelectedValue:(NSArray *)selectedValue {
+    _selectedValue = selectedValue;
     if (_pick) {
-        _pick.selectValueArry = selectValue;
+        _pick.selectValueArry = selectedValue;
         [_pick selectRow];
     }
 }
@@ -83,7 +83,7 @@
     if (_pick != nil) {
         [self.pick removeFromSuperview];
     }
-    _pick = [[BzwPicker alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) dic:_pickerData selectValueArry:_selectValue weightArry:@[@1,@1] pickerFontSize:_pickerFontSize pickerFontColor:_pickerFontColor pickerRowHeight:_pickerRowHeight pickerRowWidth:_pickerRowWidth pickerFontFamily:@""];
+    _pick = [[BzwPicker alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) dic:_pickerData selectValueArry:_selectedValue weightArry:@[@1,@1] pickerFontSize:_pickerFontSize pickerFontColor:_pickerFontColor pickerRowHeight:_pickerRowHeight pickerRowWidth:_pickerRowWidth pickerFontFamily:@""];
     __weak typeof(self) weakSelf = self;
     _pick.bolock=^(NSDictionary *backinfoArry){
         if (weakSelf.onPickerSelect) {

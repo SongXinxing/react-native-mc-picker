@@ -20,7 +20,7 @@ RCT_EXPORT_MODULE(MCPickerView)
 
 RCT_EXPORT_VIEW_PROPERTY(onPickerSelect, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(pickerData, NSArray)
-RCT_EXPORT_VIEW_PROPERTY(selectValue, NSArray)
+RCT_EXPORT_VIEW_PROPERTY(selectedValue, NSArray)
 RCT_EXPORT_VIEW_PROPERTY(pickerFontSize, NSString)
 RCT_EXPORT_VIEW_PROPERTY(pickerFontFamily, NSString)
 RCT_EXPORT_VIEW_PROPERTY(pickerFontColor, NSString)
