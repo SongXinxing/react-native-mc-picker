@@ -17,7 +17,6 @@ class MCPicker extends Component {
 
   render() {
     let {
-      style = null,
       pickerFontColor = [31, 31, 31, 1],
       pickerFontSize = 16,
       isLoop = false,
@@ -27,7 +26,6 @@ class MCPicker extends Component {
       <RNPickerViewBase
         {...props}
         isLoop={isLoop}
-        style={[{ height: 200, width: '100%' }, style]}
         pickerFontColor={pickerFontColor}
         pickerFontSize={pickerFontSize}
         onPickerSelect={this._onPickerSelect} />
