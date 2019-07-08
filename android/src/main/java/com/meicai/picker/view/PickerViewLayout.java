@@ -44,7 +44,6 @@ public class PickerViewLayout extends LinearLayout {
                 }
                 this.addView(pickerViewLinkage);
                 pickerViewLinkage.setPickerData(pickerData, weights);
-                setPickerState();
                 break;
             default:
                 pickerViewLinkage = null;
@@ -53,10 +52,9 @@ public class PickerViewLayout extends LinearLayout {
                 }
                 this.addView(pickerViewAlone);
                 pickerViewAlone.setPickerData(pickerData, weights);
-                setPickerState();
                 break;
         }
-
+        setPickerState();
     }
 
     private void setPickerState() {
@@ -78,7 +76,7 @@ public class PickerViewLayout extends LinearLayout {
     }
 
     public void setSelectValue(String[] selectValue) {
-        if (pickerState.isInit) {
+        if (pickerState.isInit && selectValue != null && selectValue.length > 0) {
             if (pickerViewAlone != null) pickerViewAlone.setSelectValue(selectValue);
             if (pickerViewLinkage != null) pickerViewLinkage.setSelectValue((selectValue));
         } else {
@@ -87,7 +85,7 @@ public class PickerViewLayout extends LinearLayout {
     }
 
     public void setSelectIndex(int[] selectIndex) {
-        if (pickerState.isInit) {
+        if (pickerState.isInit && selectIndex != null && selectIndex.length > 0) {
             if (pickerViewAlone != null) pickerViewAlone.setSelectIndex(selectIndex);
             if (pickerViewLinkage != null) pickerViewLinkage.setSelectIndex((selectIndex));
         } else {
@@ -96,7 +94,7 @@ public class PickerViewLayout extends LinearLayout {
     }
 
     public void setTextColor(int color) {
-        if (pickerState.isInit) {
+        if (pickerState.isInit && color != 0) {
             if (pickerViewAlone != null) pickerViewAlone.setTextColor(color);
             if (pickerViewLinkage != null) pickerViewLinkage.setTextColor((color));
         } else {
@@ -105,7 +103,7 @@ public class PickerViewLayout extends LinearLayout {
     }
 
     public void setTextSize(float size) {
-        if (pickerState.isInit) {
+        if (pickerState.isInit && size != 0) {
             if (pickerViewAlone != null) pickerViewAlone.setTextSize(size);
             if (pickerViewLinkage != null) pickerViewLinkage.setTextSize((size));
         } else {
