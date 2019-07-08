@@ -12,13 +12,13 @@ export interface MCPickerStyle extends FlexStyle, TransformsStyle, ShadowStyleIO
 
 export interface MCPickerProperties {
 
-  pickerFontSize?: string;
+  pickerFontSize?: number;
   // picker 字体颜色 (anroid only)
   pickerFontColor?: Array<number>;
   // picker 每行的高度 （ios only）
-  pickerRowHeight?: string;
+  pickerRowHeight?: string | number;
   // picker 每行的宽度，设置后 wheelArray 失效 (ios only)
-  pickerRowWidth?: string;
+  pickerRowWidth?: string | number;
 
   pickerData?: any[];
 
