@@ -40,9 +40,7 @@ MCPicker.propTypes = {
   isLoop: PropTypes.bool, // android only
   selectedValue: PropTypes.array,
   pickerFontColor: PropTypes.array, // [31, 31, 31, 1]
-  pickerFontSize: PropTypes.string,
-  pickerRowHeight: PropTypes.string,
-  pickerRowWidth: PropTypes.string
+  pickerFontSize: PropTypes.string
 }
 
 module.exports = MCPicker

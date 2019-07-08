@@ -492,13 +492,10 @@ public class LoopView extends View {
                     drawText(canvas, text, getX(text, paintCenterText), getY(paintCenterText), paintCenterText);
 
                     selectedIndex = shortItems.indexOf(text);
+                    if (selectedIndex >= items.size() || selectedIndex < 0) {
+                        selectedIndex = items.size() - 1;
+                    }
                     selectedItem = items.get(selectedIndex);
-
-//                    selectedIndex = items.indexOf(text);
-//                    selectedItem = sourceItems.get(selectedIndex);
-
-//                    selectedItem = text;
-//                    selectedIndex = items.indexOf(text);
                 } else {
                     // 其他条目
                     canvas.clipRect(0, 0, getWidth(), (int) (itemHeight));
