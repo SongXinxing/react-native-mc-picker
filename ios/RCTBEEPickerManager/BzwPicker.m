@@ -567,8 +567,10 @@
 //三行时候的选择哪个的逻辑
 -(void)selectValueThree
 {
-    
-    NSInteger selectIndex = [self.selectValueArry[0] integerValue];
+    NSInteger selectIndex = 0;
+    if (self.selectValueArry.count > 0) {
+        selectIndex = [self.selectValueArry[0] integerValue];
+    }
     _num = selectIndex;
     if (self.provinceArray.count>selectIndex) {
         [_pick reloadAllComponents];
