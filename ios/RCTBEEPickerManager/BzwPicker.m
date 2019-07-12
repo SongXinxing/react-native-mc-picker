@@ -571,8 +571,9 @@
     if (self.selectValueArry.count > 0) {
         selectIndex = [self.selectValueArry[0] integerValue];
     }
-    _num = selectIndex;
+    _num = 0;
     if (self.provinceArray.count>selectIndex) {
+        _num = selectIndex;
         [_pick reloadAllComponents];
         [_pick selectRow:selectIndex inComponent:0 animated:NO];
     }
@@ -624,9 +625,10 @@
 -(void)selectValueTwo
 {
     NSInteger selectIndex = [[self.selectValueArry firstObject] integerValue];
-    _num = selectIndex;
+    _num = 0;
     NSString * selectStr;
     if (self.provinceArray.count>selectIndex) {
+        _num = selectIndex;
         selectStr = [self.provinceArray objectAtIndex:selectIndex];
         [_pick reloadAllComponents];
         [_pick selectRow:selectIndex inComponent:0 animated:NO];
