@@ -20,19 +20,16 @@ import com.meicai.picker.view.ReturnData;
 import java.util.ArrayList;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
 
 public class RNPickerViewManager extends SimpleViewManager<PickerViewLayout> {
 
-    @Nonnull
     @Override
     public String getName() {
         return "MCPickerView";
     }
 
-    @Nonnull
     @Override
-    protected PickerViewLayout createViewInstance(@Nonnull final ThemedReactContext reactContext) {
+    protected PickerViewLayout createViewInstance(final ThemedReactContext reactContext) {
         final PickerViewLayout pickerViewLayout = new PickerViewLayout(reactContext);
         return pickerViewLayout;
     }
