@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.facebook.react.bridge.ReadableArray;
-import com.meicai.pickerview.R;
+import com.meicai.picker.R;
 
 
 import java.util.ArrayList;

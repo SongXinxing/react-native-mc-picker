@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
-import com.meicai.pickerview.R;
+import com.meicai.picker.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
