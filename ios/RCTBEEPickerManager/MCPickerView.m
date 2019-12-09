@@ -16,7 +16,7 @@
 
 @property (nonatomic, strong) NSDictionary * pickerData; // 数据源
 
-@property(strong, nonatomic)NSString *pickerFontSize;
+@property(strong, nonatomic)NSNumber *pickerFontSize;
 @property(strong, nonatomic)NSString *pickerFontFamily;
 @property(strong, nonatomic)NSArray *pickerFontColor;
 @property(strong, nonatomic)NSString *pickerRowHeight;
@@ -56,7 +56,7 @@
 //    _pickerFontColor = pickerFontColor;
 //}
 // 字体 大小
--(void) setPickerFontSize:(NSString *)pickerFontSize {
+-(void) setPickerFontSize:(NSNumber *)pickerFontSize {
     _pickerFontSize = pickerFontSize;
     if (_pick) {
         [self.pick resetFontSize:pickerFontSize];
