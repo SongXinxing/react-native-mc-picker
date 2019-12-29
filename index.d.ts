@@ -16,9 +16,9 @@ export interface MCPickerProperties {
   // picker 字体颜色 (anroid only)
   pickerFontColor?: Array<number>;
   // picker 每行的高度 （ios only）
-  pickerRowHeight?: string | number;
+  pickerRowHeight?: string;
   // picker 每行的宽度，设置后 wheelArray 失效 (ios only)
-  pickerRowWidth?: string | number;
+  pickerRowWidth?: string;
 
   pickerData?: any[];
 
